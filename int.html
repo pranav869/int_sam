@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InEx Designs Interiors | Chennai</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F5F0E8;
+      --dark: #1A1612;
+      --gold: #C9A96E;
+      --gold-light: #E8D5B0;
+      --warm: #8B6F47;
+      --charcoal: #2C2420;
+      --text-light: #7A6E64;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, background 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, width 0.3s, height 0.3s, opacity 0.3s;
+      opacity: 0.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 4rem;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(26,22,18,0.92);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      padding: 0.5rem 1.4rem;
+      border-radius: 0;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--dark) !important; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      z-index: 0;
+    }
+    .hero-bg-slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      animation: slideshow 15s ease-in-out infinite;
+    }
+    @keyframes slideshow {
+      0%   { transform: translateX(0); }
+      30%  { transform: translateX(0); }
+      40%  { transform: translateX(-33.333%); }
+      65%  { transform: translateX(-33.333%); }
+      75%  { transform: translateX(-66.666%); }
+      95%  { transform: translateX(-66.666%); }
+      100% { transform: translateX(0); }
+    }
+    .hero-bg-slide {
+      flex: 0 0 33.333%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform: scale(1.08);
+      animation: kenburns 15s ease-in-out infinite;
+    }
+    @keyframes kenburns {
+      0%   { transform: scale(1.08) translate(0,0); }
+      50%  { transform: scale(1.14) translate(-1%, -1%); }
+      100% { transform: scale(1.08) translate(0,0); }
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(15,10,8,0.88) 0%,
+        rgba(15,10,8,0.65) 50%,
+        rgba(15,10,8,0.15) 100%
+      );
+      z-index: 1;
+    }
+    .hero-overlay-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
+      background: linear-gradient(to top, rgba(15,10,8,0.85), transparent);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      width: 100%;
+      padding: 0 6rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: flex-end;
+      gap: 3rem;
+    }
+    .hero-left {
+      max-width: 700px;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 1rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease 0.1s both;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 7vw, 7rem);
+      font-weight: 900;
+      line-height: 0.95;
+      color: var(--cream);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.9s ease 0.25s both;
+      letter-spacing: -0.02em;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-title .outline-text {
+      -webkit-text-stroke: 1.5px var(--cream);
+      color: transparent;
+    }
+    .hero-bottom-row {
+      display: flex; align-items: center; gap: 2.5rem;
+      animation: fadeUp 0.8s ease 0.5s both;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.8;
+      max-width: 360px;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.2rem;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; align-items: center; flex-shrink: 0;
+      animation: fadeUp 0.8s ease 0.65s both;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+      padding: 1rem 2.2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      color: var(--cream);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.6rem;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-outline::after { content: '→'; transition: transform 0.2s; }
+    .btn-outline:hover { color: var(--gold); }
+    .btn-outline:hover::after { transform: translateX(4px); }
+
+    /* Hero right: floating stats cards */
+    .hero-right {
+      display: flex; flex-direction: column; gap: 1rem;
+      animation: fadeUp 0.8s ease 0.7s both;
+      flex-shrink: 0;
+    }
+    .hero-stat-card {
+      background: rgba(245,240,232,0.06);
+      border: 1px solid rgba(201,169,110,0.25);
+      backdrop-filter: blur(16px);
+      padding: 1.2rem 1.8rem;
+      text-align: center;
+      min-width: 140px;
+    }
+    .hero-stat-card .s-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .hero-stat-card .s-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+      margin-top: 0.3rem;
+    }
+    .hero-stat-card.gold-card {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .hero-stat-card.gold-card .s-num { color: var(--dark); }
+    .hero-stat-card.gold-card .s-label { color: rgba(26,22,18,0.65); }
+
+    /* Slide dots */
+    .hero-dots {
+      position: absolute;
+      right: 2.5rem; top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .hero-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(245,240,232,0.3);
+      transition: background 0.3s, height 0.3s;
+    }
+    .hero-dot.active { background: var(--gold); height: 24px; border-radius: 3px; }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    }
+    .hero-scroll span {
+      font-size: 0.6rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: rgba(245,240,232,0.4);
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      background: var(--gold);
+      overflow: hidden;
+      padding: 1rem 0;
+    }
+    .marquee-inner {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--dark);
+      padding-right: 3rem;
+    }
+    .marquee-text span { margin: 0 1.5rem; opacity: 0.4; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* SECTION SHARED */
+    section { padding: 7rem 6rem; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ABOUT */
+    .about {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-main {
+      width: 100%; aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #3a2e28, #5c4a3a);
+      overflow: hidden;
+    }
+    .about-img-main img { width:100%; height:100%; object-fit:cover; }
+    .about-img-accent {
+      position: absolute;
+      width: 55%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #8B6F47, #C9A96E);
+      bottom: -3rem; right: -3rem;
+      overflow: hidden;
+      border: 6px solid var(--cream);
+    }
+    .about-img-accent img { width:100%; height:100%; object-fit:cover; }
+    .about-years {
+      position: absolute;
+      top: 2rem; left: -2rem;
+      background: var(--dark);
+      color: var(--cream);
+      padding: 1.5rem 1.8rem;
+      text-align: center;
+    }
+    .about-years .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .about-years .lbl { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding-top: 2rem;
+    }
+    .stat-item .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .stat-item .lbl {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.3rem;
+    }
+
+    /* SERVICES */
+    .services-section {
+      background: var(--dark);
+      padding: 7rem 6rem;
+    }
+    .services-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 4rem;
+    }
+    .services-header .section-title { color: var(--cream); margin-bottom: 0; }
+    .services-header p { color: rgba(245,240,232,0.5); max-width: 280px; font-size: 0.9rem; line-height: 1.7; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+    .service-card {
+      background: #2C2420;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
+      cursor: none;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { background: #3a2e28; }
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: rgba(201,169,110,0.15);
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .service-icon {
+      width: 44px; height: 44px;
+      margin-bottom: 1.5rem;
+      color: var(--gold);
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+    .service-card p {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.45);
+      line-height: 1.8;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-section { padding: 7rem 6rem; }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+      margin-top: 3.5rem;
+    }
+    .port-item {
+      overflow: hidden;
+      position: relative;
+      background: #d4c9b8;
+    }
+    .port-item:nth-child(1) { grid-column: span 7; grid-row: span 2; aspect-ratio: unset; min-height: 500px; }
+    .port-item:nth-child(2) { grid-column: span 5; min-height: 240px; }
+    .port-item:nth-child(3) { grid-column: span 5; min-height: 240px; }
+    .port-item:nth-child(4) { grid-column: span 4; min-height: 240px; }
+    .port-item:nth-child(5) { grid-column: span 4; min-height: 240px; }
+    .port-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,22,18,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.8rem;
+    }
+    .port-item:hover .port-overlay { opacity: 1; }
+    .port-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .port-item:hover img { transform: scale(1.06); }
+    .port-overlay h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--cream); font-size: 1.2rem;
+    }
+    .port-overlay span {
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); margin-top: 0.3rem;
+    }
+
+    /* WHY US */
+    .why-section {
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+    }
+    .why-content {
+      padding: 7rem 5rem;
+    }
+    .why-content .section-title { color: var(--cream); }
+    .why-list { list-style: none; margin-top: 2.5rem; }
+    .why-list li {
+      display: flex; gap: 1.5rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .why-icon {
+      width: 44px; height: 44px;
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.25);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold); font-size: 1.1rem;
+    }
+    .why-list h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--cream); font-size: 1.05rem; margin-bottom: 0.4rem;
+    }
+    .why-list p { font-size: 0.88rem; color: rgba(245,240,232,0.45); line-height: 1.7; }
+    .why-visual {
+      background: linear-gradient(135deg, #3a2e28 0%, #1A1612 100%);
+      position: relative; overflow: hidden;
+      min-height: 600px;
+    }
+    .why-visual img { width:100%; height:100%; object-fit:cover; opacity:0.4; }
+    .why-visual-text {
+      position: absolute;
+      bottom: 4rem; left: 3rem;
+      right: 3rem;
+    }
+    .why-big-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      opacity: 0.8;
+    }
+    .why-visual-text p {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.6);
+    }
+
+    /* REVIEWS */
+    .reviews-section {
+      background: var(--cream);
+      padding: 7rem 6rem;
+    }
+    .reviews-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 4rem;
+    }
+    .overall-rating {
+      text-align: right;
+    }
+    .overall-rating .big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--dark);
+    }
+    .stars-row { color: var(--gold); font-size: 1.3rem; margin: 0.3rem 0; }
+    .overall-rating p { font-size: 0.8rem; color: var(--text-light); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .review-card {
+      background: white;
+      padding: 2.2rem;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s, transform 0.3s;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+    }
+    .review-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .review-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; }
+    .review-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+    .review-author {
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--warm);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .review-name { font-weight: 500; font-size: 0.9rem; color: var(--dark); }
+    .review-date { font-size: 0.75rem; color: var(--text-light); }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--charcoal);
+      padding: 7rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-section .section-title { color: var(--cream); }
+    .contact-info { margin-top: 2.5rem; }
+    .contact-item {
+      display: flex; gap: 1.2rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+    .contact-item-icon {
+      width: 40px; height: 40px;
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-item h4 { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .contact-item p { color: rgba(245,240,232,0.7); font-size: 0.95rem; line-height: 1.6; }
+    .contact-item a { color: rgba(245,240,232,0.7); text-decoration: none; }
+    .contact-item a:hover { color: var(--gold); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--cream);
+      padding: 1rem 1.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s;
+      resize: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--gold); }
+    .form-group select option { background: var(--charcoal); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .btn-submit {
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      padding: 1.1rem 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: none;
+      transition: background 0.3s, transform 0.2s;
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      padding: 3rem 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(201,169,110,0.15);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--cream);
+      font-weight: 700;
+    }
+    .footer-logo span { color: var(--gold); }
+    footer p { font-size: 0.8rem; color: rgba(245,240,232,0.35); }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { display: none; }
+      .hero-content { padding: 0 1.5rem 4rem; grid-template-columns: 1fr; }
+      .hero-title { font-size: 3rem; }
+      .hero-bottom-row { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .hero-right { flex-direction: row; }
+      .hero-stat-card { min-width: 100px; padding: 0.8rem 1rem; }
+      .hero-dots { display: none; }
+      .about, .why-section, .contact-section { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 2rem; }
+      section, .services-section, .portfolio-section, .reviews-section { padding: 4rem 2rem; }
+      .services-grid, .reviews-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { display: flex; flex-direction: column; }
+      .port-item { min-height: 220px !important; }
+      .hero-badge { left: 1rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#"><span>In</span>Ex Designs</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <!-- Slideshow BG -->
+  <div class="hero-bg">
+    <div class="hero-bg-slides">
+      <div class="hero-bg-slide">
+        <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&q=85" alt="Living room" />
+      </div>
+      <div class="hero-bg-slide">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1600&q=85" alt="Kitchen" />
+      </div>
+      <div class="hero-bg-slide">
+        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1600&q=85" alt="Bedroom" />
+      </div>
+    </div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-bottom"></div>
+
+  <!-- Slide dots -->
+  <div class="hero-dots">
+    <div class="hero-dot active" id="dot0"></div>
+    <div class="hero-dot" id="dot1"></div>
+    <div class="hero-dot" id="dot2"></div>
+  </div>
+
+  <!-- Main content pinned to bottom -->
+  <div class="hero-content">
+    <div class="hero-left">
+      <p class="hero-tag">Chennai's Premier Interior Studio</p>
+      <h1 class="hero-title">
+        Spaces<br>
+        <em>that tell</em>
+        <span class="outline-text">your story.</span>
+      </h1>
+      <div class="hero-bottom-row">
+        <p class="hero-desc">
+          Transforming homes and offices into living works of art — precision craftsmanship, timeless design, and a personal touch since day one.
+        </p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">Start a Project</a>
+          <a href="#portfolio" class="btn-outline">View Work</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-card gold-card">
+        <div class="s-num">4.9★</div>
+        <div class="s-label">Google Rating</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="s-num">159</div>
+        <div class="s-label">Reviews</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="s-num">500+</div>
+        <div class="s-label">Projects</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <div class="marquee-text">Living Rooms <span>✦</span> Kitchens <span>✦</span> Bedrooms <span>✦</span> Offices <span>✦</span> Partition Work <span>✦</span> PVC Shelves & Lofts <span>✦</span> Painting <span>✦</span> Plumbing <span>✦</span> Custom Furniture <span>✦</span></div>
+    <div class="marquee-text">Living Rooms <span>✦</span> Kitchens <span>✦</span> Bedrooms <span>✦</span> Offices <span>✦</span> Partition Work <span>✦</span> PVC Shelves & Lofts <span>✦</span> Painting <span>✦</span> Plumbing <span>✦</span> Custom Furniture <span>✦</span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual reveal">
+    <div class="about-years">
+      <div class="num">10+</div>
+      <div class="lbl">Years of<br>Excellence</div>
+    </div>
+    <div class="about-img-main">
+      <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=700&q=80" alt="Interior design work" />
+    </div>
+    <div class="about-img-accent">
+      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80" alt="Custom furniture" />
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title">Crafting <em style="font-family:'Playfair Display',serif;font-style:italic;">Beautiful</em> Interiors in Chennai</h2>
+    <p>At InEx Designs Interiors, we believe that every space has a unique potential waiting to be unlocked. Based in Madhavaram, Chennai, we bring high-end interior design and quality craftsmanship to homes and businesses across the city.</p>
+    <p>From elegant wooden partitions and aluminium work to PVC shelves, lofts, kitchens, and full home makeovers — our team delivers with professionalism, punctuality, and a passion for perfection.</p>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="num">500+</div>
+        <div class="lbl">Projects Done</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">4.9★</div>
+        <div class="lbl">Google Rating</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">159</div>
+        <div class="lbl">Happy Clients</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="services-header reveal">
+    <div>
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Our <em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold)">Services</em></h2>
+    </div>
+    <p>Every project is handled with care, from concept to completion — on time, every time.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <h3>Full Home Interiors</h3>
+      <p>Complete transformation of your home — living rooms, bedrooms, dining areas — with a cohesive design language.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">02</div>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+      <h3>Modular Kitchens</h3>
+      <p>Designed to match your reference — functional, beautiful, and built to last. PVC and wood options available.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">03</div>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <h3>Partition & Loft Work</h3>
+      <p>Wooden and aluminium partitions, PVC shelves, lofts, and cupboards — neat, sturdy, and cost-reasonable.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/><path d="M2 12h20"/></svg>
+      <h3>Painting Services</h3>
+      <p>Interior and exterior painting with premium finishes. Professional painters who deliver a neat, lasting job.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">05</div>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <h3>Plumbing Work</h3>
+      <p>Reliable plumbing solutions alongside your interior renovation — coordinated, efficient, and professionally executed.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">06</div>
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <h3>Custom Artwork & Décor</h3>
+      <p>Curated artwork and décor elements that ensure a wonderful ambience — unique to your space and personality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section" id="portfolio">
+  <p class="section-label reveal">Our Work</p>
+  <h2 class="section-title reveal">Recent <em style="font-family:'Playfair Display',serif;font-style:italic">Projects</em></h2>
+  <div class="portfolio-grid">
+    <div class="port-item reveal">
+      <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=80" alt="Living room project" />
+      <div class="port-overlay">
+        <h4>Premium Living Room</h4>
+        <span>Residential · Madhavaram</span>
+      </div>
+    </div>
+    <div class="port-item reveal">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Kitchen project" />
+      <div class="port-overlay">
+        <h4>Modular Kitchen</h4>
+        <span>Residential · Chennai</span>
+      </div>
+    </div>
+    <div class="port-item reveal">
+      <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Bedroom project" />
+      <div class="port-overlay">
+        <h4>Master Bedroom Suite</h4>
+        <span>Residential · Chennai</span>
+      </div>
+    </div>
+    <div class="port-item reveal">
+      <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=80" alt="Bathroom interior" />
+      <div class="port-overlay">
+        <h4>Bathroom Renovation</h4>
+        <span>Residential · North Chennai</span>
+      </div>
+    </div>
+    <div class="port-item reveal">
+      <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80" alt="Office interior" />
+      <div class="port-overlay">
+        <h4>Office Space</h4>
+        <span>Commercial · Chennai</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+  <div class="why-content">
+    <p class="section-label reveal">Why Choose Us</p>
+    <h2 class="section-title reveal">The InEx <em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold)">Difference</em></h2>
+    <ul class="why-list">
+      <li class="reveal">
+        <div class="why-icon">✦</div>
+        <div>
+          <h4>High-End Experience</h4>
+          <p>Premium quality of work at every price point — our clients consistently note the finish and attention to detail.</p>
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="why-icon">⏱</div>
+        <div>
+          <h4>Timely Completion</h4>
+          <p>We respect your time. Every project is planned and executed to finish on schedule without compromising quality.</p>
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="why-icon">₹</div>
+        <div>
+          <h4>Reasonable Pricing</h4>
+          <p>Transparent, fair pricing with no hidden surprises. Great design shouldn't cost the earth.</p>
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="why-icon">★</div>
+        <div>
+          <h4>4.9 Star Rated</h4>
+          <p>159 happy clients on Google don't lie. We're proud of every review and the relationships we build.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="why-visual">
+    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=80" alt="Interior design quality" />
+    <div class="why-visual-text">
+      <div class="why-big-num">159</div>
+      <p>5-Star Google Reviews</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-header reveal">
+    <div>
+      <p class="section-label">What Clients Say</p>
+      <h2 class="section-title">Real <em style="font-family:'Playfair Display',serif;font-style:italic">Stories</em></h2>
+    </div>
+    <div class="overall-rating">
+      <div class="big-num">4.9</div>
+      <div class="stars-row">★★★★★</div>
+      <p>159 Reviews on Google</p>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I recently had plumbing and painting work done in my house, and I'm very happy with the results. The team was professional, punctual, and did a neat job. I'd definitely recommend their services!"</p>
+      <div class="review-author">
+        <div class="review-avatar">A</div>
+        <div>
+          <div class="review-name">Anto Denvo J</div>
+          <div class="review-date">6 months ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"This interiors team have done a very great job. We asked for wooden with aluminium partition for a room and some cupboards. Work was very neat. Cost for the work was also reasonable."</p>
+      <div class="review-author">
+        <div class="review-avatar">S</div>
+        <div>
+          <div class="review-name">Srimathy Ramesh</div>
+          <div class="review-date">1 year ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Designed partition in kitchen finished exactly as references we had given. Fastly done the work — very impressed with how closely they matched our vision!"</p>
+      <div class="review-author">
+        <div class="review-avatar">K</div>
+        <div>
+          <div class="review-name">Karpagam</div>
+          <div class="review-date">8 months ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"High end experience with quality of work and timely finish of work. Highly professional team that truly understands what a client is looking for."</p>
+      <div class="review-author">
+        <div class="review-avatar">R</div>
+        <div>
+          <div class="review-name">Rajkumar M</div>
+          <div class="review-date">10 months ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Your artwork ensures wonderful ambience to home. The décor choices were unique and the installation was flawless. Love how my home looks now!"</p>
+      <div class="review-author">
+        <div class="review-avatar">K</div>
+        <div>
+          <div class="review-name">Kavitha S</div>
+          <div class="review-date">1 year ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"PVC work done for shelf, loft and kitchen — all came out beautifully. Neat finish, on time, and the team was very cooperative throughout the project."</p>
+      <div class="review-author">
+        <div class="review-avatar">P</div>
+        <div>
+          <div class="review-name">Priya Nair</div>
+          <div class="review-date">2 years ago</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div>
+    <p class="section-label reveal">Get In Touch</p>
+    <h2 class="section-title reveal">Let's Build Something <em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold)">Beautiful</em></h2>
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <h4>Address</h4>
+          <p>#15/4, Shanmuga Sundaram Nagar, 2nd Street,<br>Madhavaram, Chennai, Tamil Nadu 600060</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        <div>
+          <h4>Phone</h4>
+          <p><a href="tel:+919444335867">094443 35867</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🕐</div>
+        <div>
+          <h4>Working Hours</h4>
+          <p>Open 24 Hours, 7 Days a Week</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">⭐</div>
+        <div>
+          <h4>Google Rating</h4>
+          <p>4.9 / 5 · 159 Reviews</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="e.g. Ananya Sharma" required />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="e.g. 98765 43210" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Service Interested In</label>
+        <select>
+          <option>Full Home Interiors</option>
+          <option>Modular Kitchen</option>
+          <option>Partition & Loft Work</option>
+          <option>Painting Services</option>
+          <option>Plumbing Work</option>
+          <option>Custom Artwork & Décor</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Message</label>
+        <textarea rows="4" placeholder="Tell us about your project..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send Message →</button>
+      <div id="success-msg" style="display:none;color:var(--gold);font-size:0.9rem;margin-top:0.5rem;">
+        ✓ Message sent! We'll contact you within 24 hours.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>In</span>Ex Designs Interiors</div>
+  <p>© 2025 InEx Designs Interiors · Madhavaram, Chennai</p>
+  <p style="font-size:0.8rem;color:rgba(245,240,232,0.35);">094443 35867</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hero entrance handled by CSS animations
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    setTimeout(() => {
+      btn.textContent = 'Send Message →';
+      document.getElementById('success-msg').style.display = 'block';
+      e.target.reset();
+      setTimeout(() => document.getElementById('success-msg').style.display = 'none', 5000);
+    }, 1200);
+  }
+
+  // Hero slideshow dots
+  const dotEls = [document.getElementById('dot0'), document.getElementById('dot1'), document.getElementById('dot2')];
+  const intervals = [0, 5000, 10000];
+  let current = 0;
+  function updateDots(idx) {
+    dotEls.forEach((d,i) => d.classList.toggle('active', i === idx));
+  }
+  setInterval(() => {
+    current = (current + 1) % 3;
+    updateDots(current);
+  }, 5000);
+
+  // Smooth nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>

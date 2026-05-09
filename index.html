@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vetri Hospital — Trusted Healthcare in Chennai</title>
+  <meta name="description" content="Vetri Hospital provides compassionate, modern healthcare in Kolathur, Chennai. Open 24 hours with trusted doctors and patient-focused care." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --navy: #0a1628; 
+      --navy-mid: #112240; 
+      --teal: #0d9488; 
+      --teal-light: #14b8a6;
+      --gold: #f59e0b; 
+      --cream: #fdf8f0; 
+      --white: #ffffff;
+      --text-main: #1a2332; 
+      --text-muted: #526075;
+      --border: rgba(13, 148, 136, 0.15);
+      --shadow-sm: 0 2px 8px rgba(10, 22, 40, 0.06);
+      --shadow-md: 0 8px 24px rgba(10, 22, 40, 0.1);
+      --shadow-lg: 0 20px 48px rgba(10, 22, 40, 0.15);
+      --radius: 18px;
+      --transition: 0.3s ease;
+    }
+
+    html { 
+      scroll-behavior: smooth; 
+      scroll-padding-top: 90px;
+    }
+
+    body { 
+      font-family: 'DM Sans', sans-serif; 
+      background: var(--cream); 
+      color: var(--text-main); 
+      overflow-x: hidden; 
+      line-height: 1.6;
+    }
+
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 3px solid var(--teal-light);
+      outline-offset: 2px;
+    }
+
+    .navbar { 
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000; 
+      background: rgba(253, 248, 240, 0.85); 
+      backdrop-filter: blur(12px); 
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent; 
+      transition: background var(--transition), box-shadow var(--transition), border-color var(--transition); 
+    }
+
+    .navbar.scrolled { 
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow-sm); 
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--teal);
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--teal);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--teal);
+      transition: width 0.3s;
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: var(--navy);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      background: var(--teal);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--navy);
+      margin-left: auto;
+      padding: 4px;
+    }
+
+    .mobile-menu { 
+      display: grid; 
+      grid-template-rows: 0fr; 
+      transition: grid-template-rows 0.4s ease;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu-inner {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-menu.open {
+      grid-template-rows: 1fr;
+    }
+
+    .mobile-menu a {
+      padding: 16px 32px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 16px;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 60px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 140px 32px 80px;
+      position: relative;
+    }
+
+    .hero-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      background: var(--cream);
+    }
+
+    .bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+    }
+
+    .blob1 {
+      width: 500px;
+      height: 500px;
+      background: var(--teal-light);
+      top: -100px;
+      right: -100px;
+    }
+
+    .blob2 {
+      width: 400px;
+      height: 400px;
+      background: var(--gold);
+      bottom: 100px;
+      left: -100px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(13,148,136,0.1);
+      border: 1px solid rgba(13,148,136,0.2);
+      color: var(--teal);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero-title em {
+      color: var(--teal);
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .btn-primary,
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--teal);
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .stat-num {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 500px;
+    }
+
+    .med-card {
+      position: absolute;
+      background: white;
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+    }
+
+    .med-icon {
+      font-size: 32px;
+    }
+
+    .med-label {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--navy);
+    }
+
+    .med-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .card-float-1 {
+      top: 40px;
+      right: 10px;
+      width: 250px;
+    }
+
+    .card-float-2 {
+      top: 220px;
+      left: -20px;
+      width: 260px;
+    }
+
+    .card-float-3 {
+      bottom: 40px;
+      right: 30px;
+      width: 240px;
+    }
+
+    .marquee-strip {
+      background: var(--navy);
+      padding: 16px 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 48px;
+      white-space: nowrap;
+      width: max-content;
+    }
+
+    .marquee-track span {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .marquee-track .sep {
+      color: var(--teal);
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 32px;
+    }
+
+    .section-tag {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    .about,
+    .reviews,
+    .contact {
+      padding: 120px 0;
+    }
+
+    .services {
+      background: var(--navy);
+      padding: 120px 0;
+      color: white;
+    }
+
+    .about .section-inner,
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-desc,
+    .contact-desc {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .about-highlights,
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .highlight,
+    .contact-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .highlight-icon,
+    .ci-icon {
+      font-size: 24px;
+      background: white;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .highlight strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .about-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    .ac-header {
+      background: var(--navy);
+      padding: 24px 32px;
+    }
+
+    .ac-badge {
+      background: var(--teal);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 50px;
+    }
+
+    .ac-body {
+      padding: 32px;
+    }
+
+    .ac-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .ac-stars {
+      color: var(--gold);
+    }
+
+    .ac-label {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .ac-quote {
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.7;
+      border-left: 3px solid var(--teal);
+      padding-left: 16px;
+      margin-top: 20px;
+    }
+
+    .ac-author {
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    .services .section-title {
+      color: white;
+    }
+
+    .services-sub {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 64px;
+    }
+
+    .service-grid,
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+    }
+
+    .service-card.featured {
+      background: rgba(13,148,136,0.15);
+    }
+
+    .sc-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .sc-icon {
+      font-size: 36px;
+    }
+
+    .sc-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: rgba(255,255,255,0.1);
+    }
+
+    .service-card h3 {
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+
+    .service-card p {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .review-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      border: 1px solid var(--border);
+    }
+
+    .highlight-review {
+      background: var(--navy);
+    }
+
+    .highlight-review .review-text,
+    .highlight-review .review-name,
+    .highlight-review .review-date {
+      color: white;
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .review-text {
+      line-height: 1.8;
+      margin-bottom: 32px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .review-avatar {
+      width: 48px;
+      height: 48px;
+      background: var(--teal);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .review-name {
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .review-date {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .rating-summary {
+      text-align: center;
+      margin-top: 64px;
+    }
+
+    .rating-big {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      color: var(--navy);
+    }
+
+    .rating-stars-big {
+      color: var(--gold);
+      font-size: 24px;
+    }
+
+    .ci-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .ci-val {
+      font-size: 16px;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .map-embed {
+      border-radius: 16px;
+      overflow: hidden;
+      height: 250px;
+      margin-top: 40px;
+    }
+
+    .appt-form {
+      background: white;
+      border-radius: var(--radius);
+      padding: 48px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-family: inherit;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .footer {
+      background: var(--navy);
+      padding: 64px 0 0;
+      color: white;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a,
+    .footer-contact a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    @media (max-width: 1024px) {
+      .hero,
+      .about .section-inner,
+      .contact-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        text-align: center;
+      }
+
+      .hero-actions,
+      .hero-stats {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="logo">
+      <div class="logo-icon">✚</div>
+      <div class="logo-text">
+        <span class="logo-title">Vetri</span>
+        <span class="logo-sub">Hospital</span>
+      </div>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="tel:08903331234" class="nav-cta">📞 Call Now</a>
+
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+
+  <div class="hero-bg">
+    <div class="bg-blob blob1"></div>
+    <div class="bg-blob blob2"></div>
+  </div>
+
+  <div>
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Open 24 Hours
+    </div>
+
+    <h1 class="hero-title">
+      Compassionate Care,<br>
+      <em>Trusted by Families</em>
+    </h1>
+
+    <p class="hero-desc">
+      Vetri Hospital in Kolathur, Chennai provides quality healthcare with experienced doctors, caring nurses, and patient-first treatment trusted by hundreds of families.
+    </p>
+
+    <div class="hero-actions">
+      <a href="tel:08903331234" class="btn-primary">
+        📞 Call Hospital
+      </a>
+
+      <a href="https://wa.me/918903331234" class="btn-whatsapp">
+        💬 WhatsApp
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">4.7★</span>
+        <span class="stat-label">Google Rating</span>
+      </div>
+
+      <div class="stat-divider"></div>
+
+      <div>
+        <span class="stat-num">226+</span>
+        <span class="stat-label">Reviews</span>
+      </div>
+
+      <div class="stat-divider"></div>
+
+      <div>
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">Emergency Care</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="med-card card-float-1">
+      <div class="med-icon">🩺</div>
+      <div>
+        <div class="med-label">General Consultation</div>
+        <div class="med-sub">Experienced Doctors</div>
+      </div>
+    </div>
+
+    <div class="med-card card-float-2">
+      <div class="med-icon">🏥</div>
+      <div>
+        <div class="med-label">24 Hour Care</div>
+        <div class="med-sub">Always Available</div>
+      </div>
+    </div>
+
+    <div class="med-card card-float-3">
+      <div class="med-icon">❤️</div>
+      <div>
+        <div class="med-label">Trusted Family Hospital</div>
+        <div class="med-sub">Serving Chennai</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Emergency Care</span><span class="sep">✦</span>
+    <span>General Consultation</span><span class="sep">✦</span>
+    <span>Patient Care</span><span class="sep">✦</span>
+    <span>24 Hours Open</span><span class="sep">✦</span>
+    <span>Trusted Doctors</span><span class="sep">✦</span>
+    <span>Family Healthcare</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="section-inner">
+
+    <div>
+      <span class="section-tag">About Vetri Hospital</span>
+
+      <h2 class="section-title">
+        Caring For Chennai<br>
+        With Compassion
+      </h2>
+
+      <p class="about-desc">
+        Vetri Hospital is a trusted healthcare center located in Vinayakapuram, Kolathur, Chennai. Our hospital is known for professional doctors, attentive nurses, and quality patient care with a family-friendly environment.
+      </p>
+
+      <div class="about-highlights">
+
+        <div class="highlight">
+          <div class="highlight-icon">📍</div>
+          <div>
+            <strong>Prime Location</strong>
+            <p>Surapet Main Road, Kolathur, Chennai</p>
+          </div>
+        </div>
+
+        <div class="highlight">
+          <div class="highlight-icon">🕐</div>
+          <div>
+            <strong>Open 24 Hours</strong>
+            <p>Healthcare support anytime you need</p>
+          </div>
+        </div>
+
+        <div class="highlight">
+          <div class="highlight-icon">👨‍⚕️</div>
+          <div>
+            <strong>Experienced Doctors</strong>
+            <p>Friendly and professional medical team</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="about-card">
+      <div class="ac-header">
+        <span class="ac-badge">Verified Hospital</span>
+      </div>
+
+      <div class="ac-body">
+        <div class="ac-num">4.7★</div>
+        <div class="ac-stars">★★★★★</div>
+        <div class="ac-label">Based on 226 Google Reviews</div>
+
+        <div class="ac-quote">
+          “Excellent care and service. Doctors are knowledgeable and the staff are compassionate and attentive.”
+        </div>
+
+        <div class="ac-author">
+          — Suresh Kumar
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="services" id="services">
+
+  <div class="section-inner">
+
+    <span class="section-tag centered">Healthcare Services</span>
+
+    <h2 class="section-title centered">Our Medical Services</h2>
+
+    <p class="services-sub centered">
+      Comprehensive healthcare for individuals and families.
+    </p>
+
+    <div class="service-grid">
+
+      <div class="service-card">
+        <div class="sc-top">
+          <div class="sc-icon">🩺</div>
+          <div class="sc-num">01</div>
+        </div>
+
+        <h3>General Consultation</h3>
+
+        <p>
+          Expert diagnosis and treatment from experienced medical professionals.
+        </p>
+      </div>
+
+      <div class="service-card featured">
+        <div class="sc-top">
+          <div class="sc-icon">🚑</div>
+          <div class="sc-num">02</div>
+        </div>
+
+        <h3>Emergency Care</h3>
+
+        <p>
+          Immediate medical attention available 24 hours for emergencies.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-top">
+          <div class="sc-icon">💊</div>
+          <div class="sc-num">03</div>
+        </div>
+
+        <h3>Prescription Services</h3>
+
+        <p>
+          Complete prescription support and medication guidance.
+        </p>
+      </div>
+
+      <div class="service-card featured">
+        <div class="sc-top">
+          <div class="sc-icon">❤️</div>
+          <div class="sc-num">04</div>
+        </div>
+
+        <h3>Patient Care</h3>
+
+        <p>
+          Personalized care with comfort and patient satisfaction as priority.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="sc-top">
+          <div class="sc-icon">👨‍👩‍👧</div>
+          <div class="sc-num">05</div>
+        </div>
+
+        <h3>Family Healthcare</h3>
+
+        <p>
+          Quality healthcare services for all age groups and families.
+        </p>
+      </div>
+
+      <div class="service-card featured">
+        <div class="sc-top">
+          <div class="sc-icon">🔬</div>
+          <div class="sc-num">06</div>
+        </div>
+
+        <h3>Diagnosis & Tests</h3>
+
+        <p>
+          Accurate diagnosis and medical testing support for better treatment.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="reviews" id="reviews">
+
+  <div class="section-inner">
+
+    <span class="section-tag centered">Google Reviews</span>
+
+    <h2 class="section-title centered">
+      What Patients Say About Us
+    </h2>
+
+    <div class="reviews-grid">
+
+      <div class="review-card highlight-review">
+        <div class="review-stars">★★★★★</div>
+
+        <p class="review-text">
+          “Highly recommend Vetri Hospital in Vinayapuram. Dr. Kumaraguru is exceptionally friendly, positive and professional.”
+        </p>
+
+        <div class="review-author">
+          <div class="review-avatar">V</div>
+
+          <div>
+            <div class="review-name">Vinoth Kumar M</div>
+            <div class="review-date">Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+
+        <p class="review-text">
+          “I have been coming to this hospital for more than 5 years. Doctors are knowledgeable, patient and dedicated.”
+        </p>
+
+        <div class="review-author">
+          <div class="review-avatar">N</div>
+
+          <div>
+            <div class="review-name">Nandha Kumar</div>
+            <div class="review-date">Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+
+        <p class="review-text">
+          “Good service and maintenance. Nurses were compassionate and attentive, always checking on my comfort.”
+        </p>
+
+        <div class="review-author">
+          <div class="review-avatar">S</div>
+
+          <div>
+            <div class="review-name">Suresh Kumar</div>
+            <div class="review-date">Google Review</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="rating-summary">
+      <div class="rating-big">4.7</div>
+      <div class="rating-stars-big">★★★★★</div>
+      <div>Based on 226 Google Reviews</div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="contact" id="contact">
+
+  <div class="section-inner contact-inner">
+
+    <div>
+
+      <span class="section-tag">Contact Us</span>
+
+      <h2 class="section-title">
+        Visit Vetri Hospital
+      </h2>
+
+      <p class="contact-desc">
+        Reach out anytime for consultations, emergency support, and healthcare services.
+      </p>
+
+      <div class="contact-details">
+
+        <div class="contact-item">
+          <div class="ci-icon">📞</div>
+
+          <div>
+            <div class="ci-label">Phone</div>
+            <a href="tel:08903331234" class="ci-val">089033 31234</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon">📍</div>
+
+          <div>
+            <div class="ci-label">Address</div>
+
+            <div class="ci-val">
+              No C1B, Surapet Main Rd,<br>
+              Vinayakapuram, Kolathur,<br>
+              Chennai, Tamil Nadu 600099
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon">🕐</div>
+
+          <div>
+            <div class="ci-label">Timings</div>
+            <div class="ci-val">Open 24 Hours</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps?q=Vetri+Hospital+Chennai&output=embed"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+
+    </div>
+
+    <div>
+
+      <form class="appt-form">
+
+        <h3 class="form-title">
+          Book an Appointment
+        </h3>
+
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Enter your name">
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX">
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Time</label>
+
+          <select>
+            <option>Morning</option>
+            <option>Afternoon</option>
+            <option>Evening</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="4" placeholder="Describe your issue..."></textarea>
+        </div>
+
+        <button class="submit-btn">
+          Confirm Appointment ✦
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer class="footer">
+
+  <div class="footer-inner">
+
+    <div>
+      <div class="logo-title" style="color:white;">
+        Vetri Hospital
+      </div>
+
+      <p style="color:rgba(255,255,255,0.6); margin-top:8px;">
+        Trusted Healthcare in Chennai
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="footer-contact">
+      <a href="tel:08903331234">📞 08903331234</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      © 2026 Vetri Hospital · Kolathur, Chennai · All Rights Reserved
+    </p>
+  </div>
+
+</footer>
+
+<script>
+
+const navbar = document.getElementById('navbar');
+
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+
+</script>
+
+</body>
+</html>

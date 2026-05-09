@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IB Raj Poly Clinic — Trusted Healthcare in Chennai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink: #0b0f1a;
+      --ink-mid: #141b2d;
+      --sage: #1a6b5c;
+      --sage-light: #22917e;
+      --sage-pale: #e8f4f1;
+      --amber: #c8922a;
+      --amber-light: #e6b347;
+      --parchment: #faf7f2;
+      --white: #ffffff;
+      --text: #1a1f2e;
+      --muted: #6b7589;
+      --line: rgba(26,107,92,0.15);
+      --r: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Syne', sans-serif;
+      background: var(--parchment);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed;
+      width: 12px; height: 12px;
+      background: var(--sage);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, opacity 0.2s;
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--sage);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.35s ease, width 0.3s, height 0.3s, opacity 0.2s;
+      mix-blend-mode: multiply;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* NOISE TEXTURE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9997;
+      opacity: 0.4;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 48px;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(250,247,242,0.95);
+      backdrop-filter: blur(24px);
+      box-shadow: 0 1px 0 var(--line);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: auto;
+      display: flex; align-items: center;
+      height: 76px; gap: 40px;
+    }
+    .logo {
+      text-decoration: none;
+      display: flex; align-items: center; gap: 14px;
+      flex-shrink: 0;
+    }
+    .logo-mark {
+      width: 44px; height: 44px;
+      background: var(--ink);
+      border-radius: 12px;
+      display: grid; place-items: center;
+      position: relative; overflow: hidden;
+    }
+    .logo-mark::after {
+      content: '+';
+      color: var(--sage-light);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .logo-mark::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(34,145,126,0.3));
+    }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--ink); line-height: 1.1;
+      letter-spacing: 0.01em;
+    }
+    .logo-sub {
+      font-size: 10px; font-weight: 500;
+      color: var(--sage); letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 36px; margin-left: auto; }
+    .nav-links a {
+      font-size: 13.5px; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      position: relative; transition: color 0.25s;
+      letter-spacing: 0.04em;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 100%;
+      height: 1px; background: var(--sage);
+      transition: right 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--sage); }
+    .nav-links a:hover::after { right: 0; }
+    .nav-pill {
+      background: var(--ink); color: white;
+      padding: 11px 22px; border-radius: 50px;
+      text-decoration: none; font-size: 13.5px; font-weight: 600;
+      transition: all 0.25s; letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+    .nav-pill:hover { background: var(--sage); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,107,92,0.3); }
+    .hamburger { display: none; background: none; border: none; cursor: none; color: var(--ink); font-size: 22px; margin-left: auto; }
+    .mobile-nav { display: none; flex-direction: column; gap: 16px; padding: 20px 48px 28px; border-top: 1px solid var(--line); }
+    .mobile-nav a { font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; }
+    .mobile-nav.open { display: flex; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid; place-items: center;
+      padding: 120px 48px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-canvas {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 40%, rgba(26,107,92,0.09) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 15% 70%, rgba(200,146,42,0.06) 0%, transparent 60%),
+        var(--parchment);
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(26,107,92,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,107,92,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at center, black 40%, transparent 100%);
+    }
+    .hero-inner {
+      max-width: 1280px; width: 100%; margin: auto;
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--sage-pale); border: 1px solid rgba(26,107,92,0.25);
+      color: var(--sage); padding: 8px 18px; border-radius: 50px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 32px;
+      opacity: 0; animation: riseIn 0.8s 0.2s forwards;
+    }
+    .pulse-dot {
+      width: 7px; height: 7px; background: var(--sage);
+      border-radius: 50%; flex-shrink: 0;
+      animation: pulseGlow 2s infinite;
+    }
+    @keyframes pulseGlow {
+      0%,100% { box-shadow: 0 0 0 0 rgba(26,107,92,0.5); }
+      50% { box-shadow: 0 0 0 5px rgba(26,107,92,0); }
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 6vw, 88px);
+      font-weight: 700; line-height: 1.0;
+      color: var(--ink); margin-bottom: 28px;
+      opacity: 0; animation: riseIn 0.9s 0.35s forwards;
+    }
+    .hero-title em {
+      font-style: italic; color: var(--sage);
+      display: block;
+    }
+    .hero-title .word-outline {
+      -webkit-text-stroke: 1.5px var(--ink);
+      color: transparent;
+    }
+    .hero-desc {
+      font-size: 17px; color: var(--muted);
+      line-height: 1.8; max-width: 480px;
+      margin-bottom: 44px;
+      opacity: 0; animation: riseIn 0.9s 0.5s forwards;
+    }
+    .hero-ctas {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      margin-bottom: 60px;
+      opacity: 0; animation: riseIn 0.9s 0.65s forwards;
+    }
+    .btn-call {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--ink); color: white;
+      padding: 16px 32px; border-radius: 50px;
+      text-decoration: none; font-weight: 600; font-size: 14.5px;
+      transition: all 0.3s; letter-spacing: 0.02em;
+    }
+    .btn-call:hover {
+      background: var(--sage);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(26,107,92,0.35);
+    }
+    .btn-call .btn-icon {
+      width: 28px; height: 28px; background: rgba(255,255,255,0.15);
+      border-radius: 50%; display: grid; place-items: center;
+      font-size: 13px;
+    }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: var(--ink);
+      border: 1.5px solid var(--line);
+      padding: 16px 32px; border-radius: 50px;
+      text-decoration: none; font-weight: 600; font-size: 14.5px;
+      transition: all 0.3s;
+    }
+    .btn-wa:hover {
+      background: #25d36610; border-color: #25D366;
+      color: #1a7a3a;
+      transform: translateY(-3px);
+    }
+    .hero-proof {
+      display: flex; gap: 36px; align-items: center;
+      opacity: 0; animation: riseIn 0.9s 0.8s forwards;
+    }
+    .proof-item { display: flex; flex-direction: column; }
+    .proof-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 700; color: var(--ink); line-height: 1;
+    }
+    .proof-label { font-size: 11.5px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+    .proof-sep { width: 1px; height: 44px; background: var(--line); }
+
+    /* HERO VISUAL */
+    .hero-visual-wrap {
+      position: relative; height: 520px;
+      opacity: 0; animation: riseIn 1s 0.4s forwards;
+    }
+    .hero-ring {
+      position: absolute;
+      border-radius: 50%; border: 1px solid rgba(26,107,92,0.12);
+    }
+    .ring-1 { width: 420px; height: 420px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation: spin 40s linear infinite; }
+    .ring-2 { width: 320px; height: 320px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation: spin 28s linear infinite reverse; border-style: dashed; }
+    .ring-3 { width: 200px; height: 200px; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(26,107,92,0.05); border: none; }
+    @keyframes spin { from{transform:translate(-50%,-50%) rotate(0deg)} to{transform:translate(-50%,-50%) rotate(360deg)} }
+    .center-cross {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 80px; height: 80px;
+      background: white;
+      border-radius: 20px;
+      display: grid; place-items: center;
+      box-shadow: 0 8px 40px rgba(26,107,92,0.2);
+      z-index: 2;
+    }
+    .center-cross::after { content: '+'; font-size: 36px; font-weight: 700; color: var(--sage); line-height: 1; }
+    .float-card {
+      position: absolute;
+      background: white; border-radius: 16px;
+      padding: 16px 20px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 8px 32px rgba(10,20,40,0.1), 0 0 0 1px rgba(26,107,92,0.08);
+      z-index: 3;
+    }
+    .fc-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: var(--sage-pale);
+      display: grid; place-items: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .fc-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .fc-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+    .fc-1 { top: 40px; right: 0; width: 220px; animation: floatCard 7s ease-in-out infinite; }
+    .fc-2 { bottom: 90px; left: -20px; width: 230px; animation: floatCard 8s 1.5s ease-in-out infinite; }
+    .fc-3 { top: 50%; right: -30px; transform: translateY(-50%); width: 200px; animation: floatCard 6s 0.8s ease-in-out infinite; }
+    .rating-bubble {
+      position: absolute; bottom: 50px; right: 60px;
+      background: var(--ink); color: white;
+      border-radius: 14px; padding: 14px 20px;
+      display: flex; flex-direction: column; gap: 4px;
+      box-shadow: 0 12px 40px rgba(10,20,40,0.2);
+      animation: floatCard 9s 2s ease-in-out infinite;
+      z-index: 3;
+    }
+    .rb-stars { color: var(--amber-light); font-size: 13px; letter-spacing: 2px; }
+    .rb-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; line-height: 1; }
+    .rb-label { font-size: 11px; color: rgba(255,255,255,0.55); }
+    @keyframes floatCard {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .fc-3 { animation: floatCard3 6s 0.8s ease-in-out infinite; }
+    @keyframes floatCard3 {
+      0%,100% { transform: translateY(-50%); }
+      50% { transform: translateY(calc(-50% - 12px)); }
+    }
+
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MARQUEE */
+    .marquee {
+      background: var(--ink); padding: 18px 0;
+      overflow: hidden; position: relative;
+    }
+    .marquee::before, .marquee::after {
+      content: '';
+      position: absolute; top: 0; bottom: 0; width: 80px;
+      z-index: 1; pointer-events: none;
+    }
+    .marquee::before { left: 0; background: linear-gradient(90deg, var(--ink), transparent); }
+    .marquee::after { right: 0; background: linear-gradient(-90deg, var(--ink), transparent); }
+    .marquee-row { display: flex; gap: 0; white-space: nowrap; }
+    .marquee-track {
+      display: flex; gap: 0; animation: marquee 32s linear infinite;
+      will-change: transform;
+    }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 16px;
+      padding: 0 24px;
+    }
+    .marquee-item span { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .marquee-sep { color: var(--sage-light); font-size: 14px; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* SECTION COMMONS */
+    section { position: relative; }
+    .wrap { max-width: 1280px; margin: auto; padding: 0 48px; }
+    .tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--sage);
+      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+    }
+    .tag::before { content: ''; width: 28px; height: 1.5px; background: var(--sage); }
+    .section-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4.5vw, 60px);
+      font-weight: 700; color: var(--ink); line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .section-h em { font-style: italic; color: var(--sage); }
+
+    /* ABOUT */
+    .about { padding: 120px 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+    .about-desc { font-size: 17px; color: var(--muted); line-height: 1.85; margin-bottom: 44px; }
+    .about-pills { display: flex; flex-wrap: wrap; gap: 12px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--sage-pale); border: 1px solid rgba(26,107,92,0.2);
+      color: var(--sage); padding: 10px 18px; border-radius: 50px;
+      font-size: 13px; font-weight: 600;
+    }
+    .about-visual { position: relative; }
+    .about-frame {
+      background: white; border-radius: 28px;
+      padding: 44px;
+      box-shadow: 0 32px 80px rgba(10,20,40,0.1), 0 0 0 1px var(--line);
+      position: relative; overflow: hidden;
+    }
+    .about-frame::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,107,92,0.03) 0%, transparent 60%);
+    }
+    .about-frame::after {
+      content: '';
+      position: absolute; top: -1px; left: 40px; right: 40px; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--sage), transparent);
+    }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .stat-item { }
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px; font-weight: 700; color: var(--ink);
+      line-height: 1; display: block;
+    }
+    .stat-l { font-size: 12.5px; color: var(--muted); font-weight: 500; margin-top: 4px; display: block; }
+    .divider-h { height: 1px; background: var(--line); margin-bottom: 32px; }
+    .testimonial-mini {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-style: italic; color: var(--text);
+      line-height: 1.65; padding-left: 20px;
+      border-left: 3px solid var(--sage);
+      margin-bottom: 16px;
+    }
+    .test-by { font-size: 12px; color: var(--sage); font-weight: 600; font-style: normal; font-family: 'Syne', sans-serif; padding-left: 20px; }
+    .verified-badge {
+      position: absolute; top: -16px; right: 32px;
+      background: var(--sage); color: white;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      padding: 6px 14px; border-radius: 50px;
+    }
+
+    /* SERVICES */
+    .services { padding: 120px 0; background: var(--ink); overflow: hidden; }
+    .services .tag { color: var(--sage-light); }
+    .services .tag::before { background: var(--sage-light); }
+    .services .section-h { color: white; }
+    .services-desc { font-size: 16px; color: rgba(255,255,255,0.45); margin-bottom: 64px; max-width: 500px; line-height: 1.75; }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 24px; }
+    .services-header .section-h { margin-bottom: 0; }
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .svc-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 36px 32px;
+      transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+      position: relative; overflow: hidden;
+      cursor: default;
+    }
+    .svc-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,107,92,0.12), transparent);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .svc-card:hover { transform: translateY(-6px); border-color: rgba(26,107,92,0.4); }
+    .svc-card:hover::before { opacity: 1; }
+    .svc-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+      color: var(--sage-light); margin-bottom: 20px; display: block;
+    }
+    .svc-icon-wrap {
+      width: 56px; height: 56px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 16px; display: grid; place-items: center;
+      font-size: 26px; margin-bottom: 24px;
+      transition: background 0.4s, transform 0.4s;
+    }
+    .svc-card:hover .svc-icon-wrap { background: rgba(26,107,92,0.2); transform: scale(1.05); }
+    .svc-title { font-size: 17px; font-weight: 700; color: white; margin-bottom: 12px; }
+    .svc-body { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.75; }
+    .svc-line { height: 1px; background: rgba(255,255,255,0.06); margin-top: 28px; transition: background 0.4s; }
+    .svc-card:hover .svc-line { background: rgba(26,107,92,0.4); }
+    .svc-card.accent {
+      background: rgba(26,107,92,0.15);
+      border-color: rgba(26,107,92,0.3);
+    }
+
+    /* REVIEWS */
+    .reviews { padding: 120px 0; background: white; }
+    .reviews-hd { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 24px; }
+    .overall-rating { text-align: right; }
+    .or-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px; font-weight: 700; color: var(--ink); line-height: 1;
+    }
+    .or-stars { color: var(--amber); font-size: 20px; letter-spacing: 3px; margin: 4px 0; }
+    .or-label { font-size: 12px; color: var(--muted); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .rev-card {
+      padding: 32px 28px; border-radius: 20px;
+      border: 1px solid var(--line);
+      transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .rev-card::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px; font-weight: 700;
+      color: var(--sage-pale);
+      position: absolute; top: -20px; right: 20px;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .rev-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(10,20,40,0.08); border-color: rgba(26,107,92,0.25); }
+    .rev-card.dark {
+      background: var(--ink); border-color: transparent;
+    }
+    .rev-card.dark::before { color: rgba(255,255,255,0.04); }
+    .rev-stars { color: var(--amber); font-size: 14px; margin-bottom: 16px; }
+    .rev-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: var(--muted); line-height: 1.75; margin-bottom: 24px; position: relative; z-index: 1; }
+    .rev-card.dark .rev-text { color: rgba(255,255,255,0.75); }
+    .rev-person { display: flex; align-items: center; gap: 12px; }
+    .rev-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--sage); color: white;
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 15px; flex-shrink: 0;
+    }
+    .rev-name { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+    .rev-card.dark .rev-name { color: white; }
+    .rev-date { font-size: 11.5px; color: var(--muted); }
+
+    /* CONTACT */
+    .contact { padding: 120px 0; background: var(--parchment); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-desc { font-size: 17px; color: var(--muted); line-height: 1.8; margin-bottom: 44px; }
+    .contact-items { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
+    .c-item { display: flex; align-items: flex-start; gap: 16px; }
+    .c-icon-wrap {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: white; border: 1px solid var(--line);
+      display: grid; place-items: center; font-size: 18px;
+      flex-shrink: 0; box-shadow: 0 2px 8px rgba(10,20,40,0.06);
+    }
+    .c-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); margin-bottom: 4px; }
+    .c-val { font-size: 14.5px; color: var(--text); font-weight: 500; text-decoration: none; line-height: 1.65; }
+    .c-val:hover { color: var(--sage); }
+    .map-wrap { border-radius: 20px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 8px 32px rgba(10,20,40,0.07); }
+    .appt-box {
+      background: white; border-radius: 24px;
+      padding: 48px 44px;
+      box-shadow: 0 32px 80px rgba(10,20,40,0.1), 0 0 0 1px var(--line);
+      position: relative; overflow: hidden;
+    }
+    .appt-box::after {
+      content: '';
+      position: absolute; top: -1px; left: 40px; right: 40px; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--sage), transparent);
+    }
+    .form-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 32px;
+    }
+    .fg { margin-bottom: 20px; }
+    .fg label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink); margin-bottom: 8px; }
+    .fg input, .fg select, .fg textarea {
+      width: 100%; padding: 14px 18px;
+      border: 1.5px solid #e5e9f0; border-radius: 12px;
+      font-family: 'Syne', sans-serif; font-size: 14px; color: var(--text);
+      background: var(--parchment); outline: none;
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--sage);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(26,107,92,0.08);
+    }
+    .fg textarea { resize: vertical; }
+    .submit-btn {
+      width: 100%; padding: 16px;
+      background: var(--ink); color: white;
+      border: none; border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-size: 14.5px; font-weight: 700;
+      cursor: none; letter-spacing: 0.04em;
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .submit-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--sage);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .submit-btn:hover::before { transform: scaleX(1); }
+    .submit-btn span { position: relative; z-index: 1; }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(26,107,92,0.3); }
+
+    /* FOOTER */
+    footer { background: var(--ink); }
+    .footer-top {
+      max-width: 1280px; margin: auto; padding: 60px 48px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 40px; flex-wrap: wrap;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-logo .logo-name { color: white; }
+    .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 13.5px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; font-weight: 500; }
+    .footer-links a:hover { color: var(--sage-light); }
+    .footer-contact-links { display: flex; gap: 20px; }
+    .footer-contact-links a { font-size: 13.5px; color: rgba(255,255,255,0.65); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .footer-contact-links a:hover { color: var(--sage-light); }
+    .footer-bottom { text-align: center; padding: 24px 48px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+    /* REVEAL ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+
+    /* SCROLL INDICATOR */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2px; background: transparent; z-index: 9999;
+    }
+    .scroll-bar {
+      height: 100%; background: var(--sage);
+      width: 0%; transition: width 0.1s linear;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-desc, .hero-proof { justify-content: center; margin-left: auto; margin-right: auto; }
+      .hero-ctas { justify-content: center; }
+      .hero-visual-wrap { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .svc-grid { grid-template-columns: repeat(2,1fr); }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .tag { justify-content: center; }
+      .services-desc { margin-left: auto; margin-right: auto; text-align: center; }
+      .services-header { flex-direction: column; align-items: center; text-align: center; }
+      .overall-rating { text-align: center; }
+      .reviews-hd { flex-direction: column; align-items: center; text-align: center; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links, .nav-pill { display: none; }
+      .hamburger { display: block; }
+      .mobile-nav { padding: 20px 24px 28px; }
+      .hero { padding: 100px 24px 60px; }
+      .wrap { padding: 0 24px; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .appt-box { padding: 32px 24px; }
+      .footer-top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- SCROLL PROGRESS -->
+  <div class="scroll-progress"><div class="scroll-bar" id="scrollBar"></div></div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="logo">
+        <div class="logo-mark"></div>
+        <div class="logo-text">
+          <span class="logo-name">IB Raj</span>
+          <span class="logo-sub">Poly Clinic</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="tel:07418971039" class="nav-pill">📞 Call Now</a>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-canvas"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="pulse-dot"></span>
+          Open Everyday &nbsp;·&nbsp; Till 10 PM
+        </div>
+        <h1 class="hero-title">
+          Your Health,<br>
+          <em>Our Priority</em><br>
+          <span class="word-outline">Always.</span>
+        </h1>
+        <p class="hero-desc">Compassionate, modern healthcare at the heart of Chennai. Trusted by thousands of patients in Kavankarai and beyond.</p>
+        <div class="hero-ctas">
+          <a href="tel:07418971039" class="btn-call">
+            <div class="btn-icon">📞</div>
+            Call Now
+          </a>
+          <a href="https://wa.me/917418971039" class="btn-wa" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Us
+          </a>
+        </div>
+        <div class="hero-proof">
+          <div class="proof-item"><span class="proof-num">4.8★</span><span class="proof-label">Google Rating</span></div>
+          <div class="proof-sep"></div>
+          <div class="proof-item"><span class="proof-num">10+</span><span class="proof-label">Years of Care</span></div>
+          <div class="proof-sep"></div>
+          <div class="proof-item"><span class="proof-num">5,000+</span><span class="proof-label">Patients Treated</span></div>
+        </div>
+      </div>
+      <div class="hero-visual-wrap">
+        <div class="hero-ring ring-1"></div>
+        <div class="hero-ring ring-2"></div>
+        <div class="hero-ring ring-3"></div>
+        <div class="center-cross"></div>
+        <div class="float-card fc-1">
+          <div class="fc-icon">🩺</div>
+          <div><div class="fc-title">General Consultation</div><div class="fc-sub">Available Daily</div></div>
+        </div>
+        <div class="float-card fc-2">
+          <div class="fc-icon">💊</div>
+          <div><div class="fc-title">Prescription & Care</div><div class="fc-sub">In-clinic & Follow-up</div></div>
+        </div>
+        <div class="float-card fc-3">
+          <div class="fc-icon">🔬</div>
+          <div><div class="fc-title">Lab & Diagnostics</div><div class="fc-sub">Timely referrals</div></div>
+        </div>
+        <div class="rating-bubble">
+          <div class="rb-stars">★★★★★</div>
+          <div class="rb-num">4.8</div>
+          <div class="rb-label">Google Reviews</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-row">
+      <div class="marquee-track">
+        <div class="marquee-item"><span>General Consultation</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Health Checkup</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Patient Care</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Prescription Services</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Trusted by Thousands</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Open Everyday Till 10 PM</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Family Medicine</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Kavankarai, Chennai</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>General Consultation</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Health Checkup</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Patient Care</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Prescription Services</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Trusted by Thousands</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Open Everyday Till 10 PM</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Family Medicine</span><span class="marquee-sep">✦</span></div>
+        <div class="marquee-item"><span>Kavankarai, Chennai</span><span class="marquee-sep">✦</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about reveal" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-left reveal-left">
+          <div class="tag">About Us</div>
+          <h2 class="section-h">Caring for Chennai,<br><em>One Patient at a Time</em></h2>
+          <p class="about-desc">IB Raj Poly Clinic is a trusted healthcare provider located in the heart of Kavankarai, Chennai. We deliver quality medical treatment with compassion — combining modern practices with a personal touch that makes every patient feel heard and cared for.</p>
+          <div class="about-pills">
+            <div class="pill">📍 GNT Road, Kavankarai</div>
+            <div class="pill">🕙 Open Till 10 PM</div>
+            <div class="pill">💬 Patient-First Care</div>
+            <div class="pill">✅ Verified Clinic</div>
+          </div>
+        </div>
+        <div class="about-visual reveal-right">
+          <div class="about-frame">
+            <div class="verified-badge">✦ Verified Clinic</div>
+            <div class="stat-grid">
+              <div class="stat-item">
+                <span class="stat-n">4.8</span>
+                <span class="stat-l">⭐ Google Rating</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-n">5K+</span>
+                <span class="stat-l">Patients Treated</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-n">10+</span>
+                <span class="stat-l">Years of Service</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-n">365</span>
+                <span class="stat-l">Days Open / Year</span>
+              </div>
+            </div>
+            <div class="divider-h"></div>
+            <div class="testimonial-mini">"The care and attention to pain and sensitivity was truly exceptional. I felt genuinely looked after."</div>
+            <div class="test-by">— Sridhar Vijayakumar, Verified Patient</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="services-header">
+        <div>
+          <div class="tag">What We Offer</div>
+          <h2 class="section-h reveal">Our <em>Services</em></h2>
+        </div>
+        <p class="services-desc reveal">Comprehensive healthcare designed around your needs — all under one roof.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card reveal">
+          <span class="svc-num">01 / 06</span>
+          <div class="svc-icon-wrap">🩺</div>
+          <div class="svc-title">General Consultation</div>
+          <p class="svc-body">Expert medical advice, diagnosis, and personalized treatment plans for all general health concerns.</p>
+          <div class="svc-line"></div>
+        </div>
+        <div class="svc-card accent reveal">
+          <span class="svc-num">02 / 06</span>
+          <div class="svc-icon-wrap">❤️</div>
+          <div class="svc-title">Health Checkup</div>
+          <p class="svc-body">Comprehensive routine checkups with professional guidance to maintain your overall wellness.</p>
+          <div class="svc-line"></div>
+        </div>
+        <div class="svc-card reveal">
+          <span class="svc-num">03 / 06</span>
+          <div class="svc-icon-wrap">🤝</div>
+          <div class="svc-title">Patient Care</div>
+          <p class="svc-body">Warm, compassionate support and follow-up care throughout your entire healthcare journey.</p>
+          <div class="svc-line"></div>
+        </div>
+        <div class="svc-card reveal">
+          <span class="svc-num">04 / 06</span>
+          <div class="svc-icon-wrap">💊</div>
+          <div class="svc-title">Prescription Services</div>
+          <p class="svc-body">Accurate prescriptions and medication guidance from certified medical professionals.</p>
+          <div class="svc-line"></div>
+        </div>
+        <div class="svc-card reveal">
+          <span class="svc-num">05 / 06</span>
+          <div class="svc-icon-wrap">🔬</div>
+          <div class="svc-title">Diagnosis & Tests</div>
+          <p class="svc-body">Timely diagnostic support and referrals for lab tests to ensure accurate treatment.</p>
+          <div class="svc-line"></div>
+        </div>
+        <div class="svc-card accent reveal">
+          <span class="svc-num">06 / 06</span>
+          <div class="svc-icon-wrap">👨‍👩‍👧</div>
+          <div class="svc-title">Family Medicine</div>
+          <p class="svc-body">Trusted healthcare for the whole family — from children to senior patients, all stages of life.</p>
+          <div class="svc-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="reviews-hd reveal">
+        <div>
+          <div class="tag">Patient Reviews</div>
+          <h2 class="section-h">What Our<br><em>Patients Say</em></h2>
+        </div>
+        <div class="overall-rating">
+          <div class="or-num">4.8</div>
+          <div class="or-stars">★★★★★</div>
+          <div class="or-label">Based on Google Reviews</div>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div class="rev-card dark reveal">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">"The way they cared about pain and sensitivity was exceptional. I felt genuinely looked after throughout my entire visit."</p>
+          <div class="rev-person">
+            <div class="rev-avatar" style="background:var(--sage)">S</div>
+            <div><div class="rev-name">Sridhar Vijayakumar</div><div class="rev-date">Verified Patient</div></div>
+          </div>
+        </div>
+        <div class="rev-card reveal">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">"Excellent doctor with a very patient-friendly approach. Explains everything clearly and takes time with each patient."</p>
+          <div class="rev-person">
+            <div class="rev-avatar" style="background:var(--amber)">R</div>
+            <div><div class="rev-name">Ramya Krishnan</div><div class="rev-date">Verified Patient</div></div>
+          </div>
+        </div>
+        <div class="rev-card reveal">
+          <div class="rev-stars">★★★★☆</div>
+          <p class="rev-text">"Open till 10 PM is such a blessing. I can visit after work without worrying about timing. Very convenient clinic."</p>
+          <div class="rev-person">
+            <div class="rev-avatar" style="background:var(--ink)">M</div>
+            <div><div class="rev-name">Muthu Selvam</div><div class="rev-date">Verified Patient</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-left reveal-left">
+          <div class="tag">Get in Touch</div>
+          <h2 class="section-h">Book Your<br><em>Appointment</em></h2>
+          <p class="contact-desc">Walk in or reach out — we're here to help. No long waits, no hassle. Just quality care when you need it.</p>
+          <div class="contact-items">
+            <div class="c-item">
+              <div class="c-icon-wrap">📞</div>
+              <div><div class="c-label">Phone</div><a href="tel:07418971039" class="c-val">07418971039</a></div>
+            </div>
+            <div class="c-item">
+              <div class="c-icon-wrap">💬</div>
+              <div><div class="c-label">WhatsApp</div><a href="https://wa.me/917418971039" class="c-val" target="_blank">+91 74189 71039</a></div>
+            </div>
+            <div class="c-item">
+              <div class="c-icon-wrap">📍</div>
+              <div><div class="c-label">Address</div><div class="c-val">63, GNT Road, Fish Market Opposite,<br>Kavankarai, Chennai – 600066</div></div>
+            </div>
+            <div class="c-item">
+              <div class="c-icon-wrap">🕙</div>
+              <div><div class="c-label">Timings</div><div class="c-val">Open Everyday · Till 10 PM</div></div>
+            </div>
+          </div>
+          <div class="map-wrap">
+            <iframe src="https://www.google.com/maps?q=63+GNT+Road+Kavankarai+Chennai+600066&output=embed" width="100%" height="220" style="border:0;display:block;" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="contact-right reveal-right">
+          <form id="appointmentForm" class="appt-box">
+            <h3 class="form-h">Request an Appointment</h3>
+            <div class="fg"><label>FULL NAME</label><input type="text" placeholder="e.g. Ramya Krishnan" required></div>
+            <div class="fg"><label>PHONE NUMBER</label><input type="tel" placeholder="+91 XXXXX XXXXX" required></div>
+            <div class="fg"><label>PREFERRED TIME</label>
+              <select>
+                <option value="">Select a time slot</option>
+                <option>Morning (9 AM – 12 PM)</option>
+                <option>Afternoon (12 PM – 4 PM)</option>
+                <option>Evening (4 PM – 10 PM)</option>
+              </select>
+            </div>
+            <div class="fg"><label>MESSAGE (OPTIONAL)</label><textarea placeholder="Describe your symptoms or reason for visit..." rows="4"></textarea></div>
+            <button type="submit" class="submit-btn"><span>Confirm Appointment ✦</span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo logo">
+        <div class="logo-mark"></div>
+        <div class="logo-text">
+          <span class="logo-name">IB Raj Poly Clinic</span>
+          <p class="footer-tagline">Trusted Healthcare in Chennai</p>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-contact-links">
+        <a href="tel:07418971039">📞 07418971039</a>
+        <a href="https://wa.me/917418971039" target="_blank">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 IB Raj Poly Clinic · Kavankarai, Chennai · All Rights Reserved</p></div>
+  </footer>
+
+  <script>
+    // --- CUSTOM CURSOR ---
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx - 6 + 'px';
+      cursor.style.top = my - 6 + 'px';
+    });
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx - 18 + 'px';
+      ring.style.top = ry - 18 + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+    document.querySelectorAll('a, button, .svc-card, .rev-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'scale(2.5)';
+        ring.style.width = '60px'; ring.style.height = '60px';
+        ring.style.marginLeft = '-12px'; ring.style.marginTop = '-12px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'scale(1)';
+        ring.style.width = '36px'; ring.style.height = '36px';
+        ring.style.marginLeft = '0'; ring.style.marginTop = '0';
+      });
+    });
+
+    // --- SCROLL PROGRESS ---
+    const scrollBar = document.getElementById('scrollBar');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      scrollBar.style.width = pct + '%';
+    });
+
+    // --- NAVBAR ---
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+    // --- HAMBURGER ---
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => mobileNav.classList.toggle('open'));
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+    // --- SCROLL REVEAL ---
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // --- SERVICE CARDS STAGGER ---
+    const svcCards = document.querySelectorAll('.svc-card');
+    const svcObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(svcCards).indexOf(entry.target);
+          entry.target.style.transitionDelay = (idx * 80) + 'ms';
+          entry.target.classList.add('visible');
+          svcObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    svcCards.forEach(c => {
+      c.classList.add('reveal');
+      svcObs.observe(c);
+    });
+
+    // --- COUNTER ANIMATION ---
+    function animateCount(el, target, suffix = '') {
+      let start = 0;
+      const dur = 1800;
+      const step = timestamp => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const val = el.dataset.count;
+          const suffix = el.dataset.suffix || '';
+          animateCount(el, parseFloat(val), suffix);
+          countObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+
+    // --- FORM SUBMIT ---
+    const form = document.getElementById('appointmentForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const btn = form.querySelector('.submit-btn span');
+      btn.textContent = '✅ Appointment Requested!';
+      form.querySelector('.submit-btn').style.background = 'var(--sage)';
+      form.querySelector('.submit-btn').disabled = true;
+      setTimeout(() => {
+        btn.textContent = 'Confirm Appointment ✦';
+        form.querySelector('.submit-btn').style.background = '';
+        form.querySelector('.submit-btn').disabled = false;
+        form.reset();
+      }, 3200);
+    });
+
+    // --- ACTIVE NAV LINK ---
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.style.color = l.getAttribute('href') === `#${entry.target.id}` ? 'var(--sage)' : '');
+        }
+      });
+    }, { threshold: 0.4, rootMargin: '-60px 0px -40% 0px' }).observe && sections.forEach(s => new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.style.color = l.getAttribute('href') === `#${entry.target.id}` ? 'var(--sage)' : '');
+        }
+      });
+    }, { threshold: 0.4 }).observe(s));
+  </script>
+</body>
+</html>
